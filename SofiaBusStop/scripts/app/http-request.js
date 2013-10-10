@@ -18,7 +18,28 @@ window.httpRequest = (function(){
         return promise;
     }
     
+    function postJSON(parameter){
+        var promise = new RSVP.Promise(function(resolve, reject){
+            $.ajax({
+                url:"http://sofiabusapi.apphb.com/api/bus/",
+                type:"POST",
+                dataType:"json",
+                contentType:"application/json",
+                data:parameter,
+                timeout:5000,
+                success:function(data){
+                    resolve(data);
+                },
+                error:function(err){
+                    reject(err);
+                }
+            });
+        });
+        return promise;
+    }
+    
     return {
-        getJSON:getJSON
+        getJSON:getJSON,
+        postJSON:postJSON
     };    
 }());

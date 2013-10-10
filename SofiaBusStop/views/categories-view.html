@@ -7,9 +7,10 @@
                 data-text-field="Name"
                 data-value-field="Id">
         </select>
-        <div id="category-info">
-            <h1 data-bind="text: selectedCategory.Name" data-align="center"></h1>            
-            <ul data-role="listview" data-bind="source: selectedCategory.Places" data-template="place-template"></ul>                
-        </div>
+        <select id="category-info">
+            <option data-bind="text: selectedCategory.DirectionOneName" data-align="center" value="1" ></option>
+            <option data-bind="text: selectedCategory.DirectionTwoName" data-align="center" value="2"></option>   
+           <!-- <ul data-role="listview" data-bind="source: selectedCategory.Places" data-template="place-template"></ul>     -->           
+        </select>
     </div>
 </div>

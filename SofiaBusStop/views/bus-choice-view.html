@@ -1,12 +1,24 @@
 <div data-role="view" id="bus-choice-view" data-id="bus-choice-view"
-     data-layout="main-layout" data-title="Schedule"
+     data-layout="main-layout" data-title="Избор"
      data-show="app.choice.init">
-    <ul>
-        <li>
-            <a data-role="button" data-bind="event {click: getNearestStop}">By location</a>
-        </li>
-    </ul>
-    <div id="test">
-        Test
+    <p>
+Content
+        
+        
+        
+        
+    </p>
+    <div id="categories-holder">
+        <select id="categories-list" data-role="dropdownlist"
+                data-bind="source: categories, events: { change: change}"
+                data-text-field="Name"
+                data-value-field="Id">
+        </select>
+        <select id="category-info">
+            <option data-bind="text: selectedCategory.DirectionOneName" data-align="center" value="1" ></option>
+            <option data-bind="text: selectedCategory.DirectionTwoName" data-align="center" value="2"></option>            
+        </select>
     </div>
+    
+      <a data-role="button" data-bind="event {click: getSearchData}">Get Schedule</a>
 </div>

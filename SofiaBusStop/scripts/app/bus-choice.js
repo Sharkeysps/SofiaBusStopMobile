@@ -22,10 +22,20 @@ var app = app || {};
         var busValue = busNumber;
         var direction = $('#category-info').val();
         //Pass these two variables to the other view
+        
+        var history = window.localStorage.getItem("history");
+        var obj = jQuery.parseJSON(history);
+        var date = new Date();
+        var day = date.toLocaleString() 
+        var addBus = String("Автобус " + busValue + " " + day);
+        var index=addBus.indexOf(" GMT");
+        addBus=addBus.substring(0,index);
+        
+        obj.push(addBus);
+        window.localStorage.setItem("history", JSON.stringify(obj));
        
         window.localStorage.setItem("bus", busValue);
         window.localStorage.setItem("direction", direction);
-      
     }
     
     function onCategoryChanged(e) {             

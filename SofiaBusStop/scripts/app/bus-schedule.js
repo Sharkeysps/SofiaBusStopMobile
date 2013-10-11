@@ -23,7 +23,7 @@ var app = app || {};
             .template("<div id='box'>Автобус #= Bus #</div><div>Спирка #= BusStopName #</div><div>Разстояние #= DistanceToStop # метра</div><div>График #= Schedule #</div>");
             var result = template(obj);
             var test = testDiv.html(result);
-            // var test=testDiv.html("<div>Avtobus " + obj.Bus+"</div>"+"<div>Spirka "+obj.BusStopName+"</div>");
+        
         });
     }
     

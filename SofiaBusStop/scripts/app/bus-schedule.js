@@ -23,7 +23,6 @@ var app = app || {};
             .template("<div id='box'>Автобус #= Bus #</div><div>Спирка #= BusStopName #</div><div>Разстояние #= DistanceToStop # метра</div><div>График #= Schedule #</div>");
             var result = template(obj);
             var test = testDiv.html(result);
-        
         });
     }
     
@@ -32,9 +31,14 @@ var app = app || {};
     });
     
     function init(e) {
-        var p = 5;
         kendo.bind(e.view.element, viewModel);
-        getNearestStop();
+        if (!checkConnection.check()) {
+            navigator.notification.alert("Моля свържете се с интернет", function() {
+            })
+        }
+        else {
+            getNearestStop();
+        }
     }   
     
     a.schedule = {

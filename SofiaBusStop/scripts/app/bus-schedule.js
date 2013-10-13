@@ -92,7 +92,7 @@ var app = app || {};
                 Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
         var brng = toDeg(Math.atan2(y, x));
         
-        var arrowDeg = ((brng + 360))-currentHeading;
+        var arrowDeg =(toDeg(((brng + 360)%360))+toDeg(currentHeading));
         
         arrowPosition(arrowDeg);
     }

@@ -34,12 +34,15 @@ var app = app || {};
             .template("<div id='box'>Автобус #= Bus #</div><div>Спирка #= BusStopName #</div><div>Разстояние #= DistanceToStop # метра</div><div>График #= Schedule #</div>");
             var result = template(parsedData);
             testDiv.html(result);
+            calculateDirection()
         });
     }
     
     var viewModel = kendo.observable({
         getNearestStop:getNearestStop
     });
+    
+
     
     function init(e) {
         kendo.bind(e.view.element, viewModel);
@@ -54,6 +57,52 @@ var app = app || {};
             getNearestStop();
         }
     }   
+    
+    function toDeg(rad) {
+        return rad * 180 / Math.PI;
+    }
+    
+    function calculateDirection() {
+        //1
+        var lat1 = 0;
+        var long1 = 0;
+        
+        
+        //2
+        var lat2=busStopLat;
+        var lon2=busStopLong;
+        
+        var currentHeading = 0;
+        
+        cordovaExt.getLocation().
+        then(function(location) {
+            lat1 = parseFloat(location.coords.latitude);
+            long1 = parseFloat(location.coords.longitude);  
+        });
+        
+        navigator.compass.getCurrentHeading(function(heading) {
+            currentHeading = parseInt(heading.magneticHeading);
+        }, function() {
+        });
+        
+        //math magic
+        var dLon = (lon2 - long1);
+        var y = Math.sin(dLon) * Math.cos(lat2);
+        var x = Math.cos(lat1)*Math.sin(lat2) -
+                Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+        var brng = toDeg(Math.atan2(y, x));
+        
+        var arrowDeg = ((brng + 360))-currentHeading;
+        
+        arrowPosition(arrowDeg);
+    }
+    
+    function arrowPosition(degree) {
+        degree = Math.round(degree);
+        var arrow = " <div id=\"arrow\" style=\"-webkit-transform: rotate(" + degree + "deg);\">" + "<img src=\"img/Arrow.png\"/>" + "</div>";
+        var divArrow = $('#container');
+        divArrow.html(arrow);
+    }
     
     a.schedule = {
         init:init          

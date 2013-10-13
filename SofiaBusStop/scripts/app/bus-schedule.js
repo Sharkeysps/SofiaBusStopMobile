@@ -1,6 +1,9 @@
 var app = app || {};
 
 (function(a) {
+    var busStopLat = 0;
+    var busStopLong = 0;
+    
     function getNearestStop() {
         var bus = window.localStorage.getItem("bus");
         var direction = window.localStorage.getItem("direction");
@@ -9,20 +12,26 @@ var app = app || {};
         then(function(location) {
             var parsedLat = parseFloat(location.coords.latitude);
             var parsedLong = parseFloat(location.coords.longitude);
+            
             var parameter = {"Bus":bus,"Direction":direction,"Latitude":parsedLat,"Longitude":parsedLong};
-            var test = JSON.stringify(parameter);
-            return httpRequest.postJSON(test);     
+            
+            var postData = JSON.stringify(parameter);
+            return httpRequest.postJSON(postData);     
         })
         .then(function(data) {        
-            var test = JSON.stringify(data);
-            var obj = jQuery.parseJSON(test);
+            var stringedData = JSON.stringify(data);
+            var parsedData = jQuery.parseJSON(stringedData);
+            
+            busStopLat = parseFloat(parsedData.BusStopLatitude);
+            busStopLong = parseFloat(parsedData.BusStopLongitude);
+            
             var testDiv = $('#test');
-            obj.DistanceToStop = Math.round(obj.DistanceToStop);
+            parsedData.DistanceToStop = Math.round(parsedData.DistanceToStop);
             var template = 
             kendo
             .template("<div id='box'>Автобус #= Bus #</div><div>Спирка #= BusStopName #</div><div>Разстояние #= DistanceToStop # метра</div><div>График #= Schedule #</div>");
-            var result = template(obj);
-            var test = testDiv.html(result);
+            var result = template(parsedData);
+            testDiv.html(result);
         });
     }
     
@@ -32,6 +41,9 @@ var app = app || {};
     
     function init(e) {
         kendo.bind(e.view.element, viewModel);
+           
+        window.localStorage.setItem("prevPage", "views/bus-schedule-view.html#bus-schedule-view");
+        
         if (!checkConnection.check()) {
             navigator.notification.alert("Моля свържете се с интернет", function() {
             })

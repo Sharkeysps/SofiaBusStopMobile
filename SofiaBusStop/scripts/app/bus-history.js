@@ -22,7 +22,10 @@ var app = app || {};
     });
     
     function init(e) {
+
         kendo.bind(e.view.element, viewModel);
+           
+        window.localStorage.setItem("prevPage", "views/bus-history-view.html#bus-history-view");
         displayHistory();
     }   
     

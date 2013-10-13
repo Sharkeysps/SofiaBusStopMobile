@@ -9,7 +9,7 @@ var app = app || {};
         }
         
         app.application = new kendo.mobile.Application(document.body);
-        
+        window.localStorage.setItem("prevPage", "index.html#home-view");
     });
     
     document.addEventListener("pause", function () {

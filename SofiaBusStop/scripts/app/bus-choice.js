@@ -13,6 +13,8 @@ var app = app || {};
     function init(e) {
         kendo.bind(e.view.element, viewModel);
         
+        window.localStorage.setItem("prevPage", "views/bus-choice-view.html#bus-choice-view");
+        
         if (!checkConnection.check()) {
             navigator.notification.alert("Моля свържете се с интернет", function() {
             })
@@ -45,9 +47,9 @@ var app = app || {};
         window.localStorage.setItem("direction", direction);
         
         
-       // app.application.navigate("views/bus-schedule-view.html#bus-schedule-view");
+        app.application.navigate("views/bus-schedule-view.html#bus-schedule-view");
         
-           app.application.navigate("index.html#home-view");
+           //app.application.navigate("index.html#home-view");
     }
     
     function onCategoryChanged(e) {             

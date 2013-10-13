@@ -1,24 +1,30 @@
 <div data-role="view" id="bus-choice-view" data-id="bus-choice-view"
      data-layout="main-layout" data-title="Търсене"
      data-show="app.choice.init">
+    <br/>
+    <div style=" display: block;text-align:center">
+        <img src="img/BusStop.jpg" width="60%" height="20%" />
+    </div>
     <p>
-Content
-        
-        
-        
-        
+        Моля изберете автобуса,който искате и след това изберете желаната от вас посока.
+        Натиснете бутона "Покажи разписание" за да видите точното разписание на желания автобус
     </p>
     <div id="categories-holder">
-        <select id="categories-list" data-role="dropdownlist"
-                data-bind="source: categories, events: { change: change}"
-                data-text-field="Name"
-                data-value-field="Id">
-        </select>
+        <div id="bus-number" style="font-size:18px;text-align:center">
+            <select id="categories-list" data-role="dropdownlist"
+                    data-bind="source: categories, events: { change: change}"
+                    data-text-field="Name"
+                    data-value-field="Id">
+            </select>
+        </div>
+        <br/>
         <select id="category-info">
             <option data-bind="text: selectedCategory.DirectionOneName" data-align="center" value="1" ></option>
-            <option data-bind="text: selectedCategory.DirectionTwoName" data-align="center" value="2"></option>            
+            <option data-bind="text: selectedCategory.DirectionTwoName" data-align="center" value="2"></option>
         </select>
     </div>
-    
-          <a data-role="button"  data-bind="event {click: getSearchData}">Покажи разписание</a>
+    <br/>
+    <div class="button" style="text-align:center;width=25%">
+        <a data-role="button"  data-bind="event {click: getSearchData}">Покажи разписание</a>
+    </div>
 </div>

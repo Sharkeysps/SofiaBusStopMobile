@@ -5,6 +5,9 @@ var app = app || {};
     var busStopLong = 0;
     
     function getNearestStop() {
+        var testDiv = $('#test');
+        testDiv.html("");
+        
         var bus = window.localStorage.getItem("bus");
         var direction = window.localStorage.getItem("direction");
         
@@ -24,8 +27,7 @@ var app = app || {};
             
             busStopLat = parseFloat(parsedData.BusStopLatitude);
             busStopLong = parseFloat(parsedData.BusStopLongitude);
-            
-            var testDiv = $('#test');
+          
             parsedData.DistanceToStop = Math.round(parsedData.DistanceToStop);
             var template = 
             kendo

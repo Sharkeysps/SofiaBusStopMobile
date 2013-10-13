@@ -49,7 +49,7 @@ var app = app || {};
         
         app.application.navigate("views/bus-schedule-view.html#bus-schedule-view");
         
-           //app.application.navigate("index.html#home-view");
+        
     }
     
     function onCategoryChanged(e) {             
